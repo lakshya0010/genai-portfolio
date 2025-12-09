@@ -1,0 +1,11 @@
+sentence-transformers
+langchain
+openai
+chromadb
+faiss-cpu
+streamlit
+fastapi
+uvicorn
+python-dotenv
+requests
+huggingface_hub
