@@ -6,3 +6,10 @@
 - tokenization: splitting text into tokens that models can process
 - preprocessing: cleaning text (lowercasing, removing urls, splitting sentences)
 - tf-idf vs embeddings: tf-idf is keyword-based, embeddings capture meaning
+
+## Day 2 Notes
+
+- Loaded the SentenceTransformer model: all-MiniLM-L6-v2
+all-MiniLM-L6-v2 is a compact, general-purpose sentence embedding model optimized for fast, reasonably accurate semantic similarity across common NLP tasks.
+- Converted sentences into fixed-length vectors (384 dimensional)
+- The output vectors represent the semantic meaning of sentences
