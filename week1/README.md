@@ -13,3 +13,10 @@
 all-MiniLM-L6-v2 is a compact, general-purpose sentence embedding model optimized for fast, reasonably accurate semantic similarity across common NLP tasks.
 - Converted sentences into fixed-length vectors (384 dimensional)
 - The output vectors represent the semantic meaning of sentences
+
+
+## Day 3 Notes
+
+- Used cosine similarity to compare sentence embeddings
+- Semantically similar sentences have higher cosine similarity scores
+- This principle is used in semantic search and RAG retrieval
