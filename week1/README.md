@@ -20,3 +20,11 @@ all-MiniLM-L6-v2 is a compact, general-purpose sentence embedding model optimize
 - Used cosine similarity to compare sentence embeddings
 - Semantically similar sentences have higher cosine similarity scores
 - This principle is used in semantic search and RAG retrieval
+
+
+## Day 4 Notes
+
+- Text is broken into tokens before being processed by models
+- Token count is different from word count due to subword tokenization
+- Token limits affect prompt size, cost, and chunking strategies
+
