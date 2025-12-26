@@ -41,3 +41,10 @@ all-MiniLM-L6-v2 is a compact, general-purpose sentence embedding model optimize
 - Learned why vector databases are used instead of brute-force search
 - Stored sentence embeddings in ChromaDB
 - Queried top-k most similar documents efficiently
+
+
+## Day 7 Notes
+
+- Built a Streamlit UI for semantic search
+- Connected user input to vector database retrieval
+- Created an interactive demo for embeddings-based search
