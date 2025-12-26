@@ -28,3 +28,9 @@ all-MiniLM-L6-v2 is a compact, general-purpose sentence embedding model optimize
 - Token count is different from word count due to subword tokenization
 - Token limits affect prompt size, cost, and chunking strategies
 
+
+## Day 5 Notes
+
+- Implemented semantic search using sentence embeddings
+- Built query → embedding → cosine similarity → top-k pipeline
+- Verified that semantically similar sentences rank higher
