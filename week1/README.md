@@ -34,3 +34,10 @@ all-MiniLM-L6-v2 is a compact, general-purpose sentence embedding model optimize
 - Implemented semantic search using sentence embeddings
 - Built query → embedding → cosine similarity → top-k pipeline
 - Verified that semantically similar sentences rank higher
+
+
+## Day 6 Notes
+
+- Learned why vector databases are used instead of brute-force search
+- Stored sentence embeddings in ChromaDB
+- Queried top-k most similar documents efficiently
