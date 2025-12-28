@@ -5,3 +5,10 @@
 - Used a local LLM (Llama 3 via Ollama)
 - Sent system and user prompts programmatically
 - Observed how prompt instructions control output style
+
+
+## Day 9 Notes
+
+- Learned common prompt engineering patterns
+- Observed how role, constraints, and examples affect output
+- Understood why prompt structure is critical for reliable LLM behavior
