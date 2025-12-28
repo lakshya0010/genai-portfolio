@@ -15,6 +15,8 @@ Good chunking improves the quality of answers in RAG systems.
 Poor chunking can lead to missing context or incomplete answers.
 Therefore, choosing the right chunk size is an important design decision.
 """
+
+
 def naive_chunk_text(long_text):
     chunks = []
     limit = 0

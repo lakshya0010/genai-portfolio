@@ -19,3 +19,11 @@
 - Learned why long documents must be chunked for LLMs
 - Implemented naive and sentence-aware chunking
 - Understood how chunk size affects retrieval and context
+
+
+
+## Day 11 Notes
+
+- Built a complete RAG pipeline using local LLMs
+- Combined chunking, embeddings, vector DB retrieval, and generation
+- Observed grounded answers based on document context
