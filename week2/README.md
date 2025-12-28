@@ -12,3 +12,10 @@
 - Learned common prompt engineering patterns
 - Observed how role, constraints, and examples affect output
 - Understood why prompt structure is critical for reliable LLM behavior
+
+
+## Day 10 Notes
+
+- Learned why long documents must be chunked for LLMs
+- Implemented naive and sentence-aware chunking
+- Understood how chunk size affects retrieval and context
