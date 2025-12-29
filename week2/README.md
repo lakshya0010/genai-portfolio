@@ -34,3 +34,11 @@
 - Tuned retrieval quality using different top-k values
 - Added metadata to chunks for citation support
 - Implemented simple source attribution to reduce hallucinations
+
+
+## Day 13 Notes
+
+- Built a Streamlit-based RAG application
+- Allowed users to upload documents and ask questions
+- Displayed grounded answers with source attribution
+- A little less stable, need to work on that
