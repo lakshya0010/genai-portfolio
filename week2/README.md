@@ -27,3 +27,10 @@
 - Built a complete RAG pipeline using local LLMs
 - Combined chunking, embeddings, vector DB retrieval, and generation
 - Observed grounded answers based on document context
+
+
+## Day 12 Notes
+
+- Tuned retrieval quality using different top-k values
+- Added metadata to chunks for citation support
+- Implemented simple source attribution to reduce hallucinations

@@ -48,7 +48,8 @@ collection = chroma_clint.get_or_create_collection(name="rag_demo")
 collection.add(
     documents=chunks,
     embeddings= embeddings,
-    ids=[f'Chunk_{i}' for i in range(len(chunks))]
+    ids=[f'Chunk_{i}' for i in range(len(chunks))],
+    metadatas=[{"source": f"Chunk_{i}"} for i in range(len(chunks))]
 )
 
 query = "Why is chunking important in RAG Systems?"
@@ -60,18 +61,25 @@ results = collection.query(
     n_results=2
 )
 
-retrieved_chunks = results["documents"][0]
-context = "\n".join(retrieved_chunks)
+retrieved_documents = results["documents"][0]
+retrieved_sources = [m["source"] for m in results["metadatas"][0]]
+
+context = "\n".join(retrieved_documents)
 
 
 prompt = f"""
 Use the following context to answer the question.
+If the answer is not in the context, say "Not found in the document."
 
 Context:
 {context}
 
 Question:
 {query}
+
+Answer the question using only the context.
+Do NOT mention sources or citations in your answer.
+
 """
 
 
@@ -88,13 +96,14 @@ if not has_enough_ram(4.0):
 response = ollama.chat(
     model="llama3",
     messages=[
-        {"role": "system", "content": "You must answer the question using only the given context."},
+        {"role": "system", "content": "You are a precise assistant that cites sources."},
         {"role": "user", "content": prompt}
     ]
 )
 
 print("\nAnswer: ")
 print(response["message"]["content"])
+print("\nSources:", retrieved_sources)
 
 
 
