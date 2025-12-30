@@ -5,6 +5,7 @@ from sentence_transformers import SentenceTransformer
 import chromadb
 
 
+
 def chunk_text(text,max_size = 300):
     sentences = re.split(r'(?<=[!.?])\s+', text.strip())
     chunks = []
@@ -21,46 +22,76 @@ def chunk_text(text,max_size = 300):
     return chunks
 
 
+
+# Streamlit UI
 st.title("RAG Document Q&A")
 st.write("Upload a document and get relevent questions answered")
 
+
+
+#Initialization
+if "indexed" not in st.session_state:
+    st.session_state.indexed = False
+
+if "collection" not in st.session_state:
+    st.session_state.collection = None
+
+if "embedder" not in st.session_state:
+    st.session_state.embedder = SentenceTransformer("all-MiniLM-L6-v2")
+
+
 uploaded_file = st.file_uploader("Upload a .txt document", type=["txt"])
 
-if uploaded_file:
-    document_text = uploaded_file.read().decode("utf-8")
-    chunks = chunk_text(document_text)
 
-    st.write(f'document split into {len(chunks)} Chunks')
 
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    embeddings = model.encode(chunks).tolist()
+#Document Ingestion
+if uploaded_file and not st.session_state.indexed:
+    with st.spinner("Indexing Document..."):
+        document_text = uploaded_file.read().decode("utf-8")
+        chunks = chunk_text(document_text)
 
-    clint = chromadb.Client()
-    collection = clint.get_or_create_collection(name="rag_1")
+        embeddings = st.session_state.embedder.encode(chunks).tolist()
 
-    collection.add(
-        documents=chunks,
-        embeddings=embeddings,
-        ids=[f"chunk_{i}" for i in range(len(chunks))],
-        metadatas=[{"source": f"chunk_{i}"} for i in range(len(chunks))]
-    )
+        clint = chromadb.Client()
+        collection = clint.get_or_create_collection(name="stable_rag")
 
-    question = st.text_input("Ask a question: ")
-    
-    if st.button("Ask") and question:
-        query_embedding = model.encode([question]).tolist()
-
-        results = collection.query(
-            query_embeddings=query_embedding,
-            n_results=2
+        collection.add(
+            documents=chunks,
+            embeddings=embeddings,
+            ids=[f"chunk_{i}" for i in range(len(chunks))],
+            metadatas=[{"source": f"chunk_{i}"} for i in range(len(chunks))]
         )
 
-        retrieved_docs = results["documents"][0]
-        retrieved_sources = [m["source"] for m in results["metadatas"][0]]
+        st.session_state.collection = collection
+        st.session_state.indexed = True
+    st.success(f"Document indexed into {len(chunks)} Chunks.")
 
-        context = '\n'.join(retrieved_docs)
 
-        prompt = f"""
+
+#Question Answering
+question = st.text_input("Ask a question: ")
+    
+if st.button("Ask") and question:
+    if not st.session_state.indexed:
+        st.warning("Please upload the document first.")
+    elif (len(question.strip())<5):
+        st.warning("Please enter a more specific question.")
+    else:
+        try:
+            with st.spinner("Retrieving and generating answer..."):
+                query_embedding = st.session_state.embedder.encode([question]).tolist()
+
+                results = st.session_state.collection.query(
+                    query_embeddings=query_embedding,
+                    n_results=2
+                )
+
+                retrieved_docs = results["documents"][0]
+                retrieved_sources = [m["source"] for m in results["metadatas"][0]]
+
+                context = "\n".join(retrieved_docs)
+
+                prompt = f"""
 Use the following context to answer the question.
 If the answer is not in the context, say "Not found in the document."
 
@@ -69,18 +100,24 @@ Context:
 
 Question:
 {question}
-"""
-        response = ollama.chat(
-            model="llama3",
-            messages=[
-                {"role":"system", "content":"You answer only from context and do not invent facts."},
-                {"role":"user", "content": prompt}
-            ]
-        )
+    """
+                    
 
-        st.subheader("Answer")
-        st.write(response["message"]["content"])
+                response = ollama.chat(
+                    model="llama3",
+                    messages=[
+                        {"role":"system", "content":"You answer only from context and do not invent facts."},
+                        {"role":"user", "content": prompt}
+                    ]
+                )
 
-        st.subheader("Sources")
-        for src in retrieved_sources:
-            st.write("-", src)
+            st.subheader("Answer")
+            st.write(response["message"]["content"])
+
+            st.subheader("Sources")
+            for src in retrieved_sources:
+                st.write("-", src)
+
+        except Exception as e:
+            st.error("The language model failed to respond. Please try again.")
+

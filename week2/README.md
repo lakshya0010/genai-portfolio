@@ -42,3 +42,11 @@
 - Allowed users to upload documents and ask questions
 - Displayed grounded answers with source attribution
 - A little less stable, need to work on that
+
+
+## Day 14 Notes
+
+- Stabilized Streamlit RAG app using session state
+- Prevented repeated embedding and indexing
+- Added graceful LLM failure handling
+- Improved UX with status indicators
