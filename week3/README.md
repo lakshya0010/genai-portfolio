@@ -19,3 +19,11 @@
 - Built a research assistant agent with a fixed, reliable pipeline
 - Used agents to produce a structured research report
 - Learned when to remove LLM decision-making in favor of controller logic
+
+
+
+## Day 18 Notes
+
+- Reimplemented RAG using LangChain LCEL (Runnable pipelines)
+- Avoided deprecated chains and legacy APIs
+- Mapped manual RAG components directly to LangChain abstractions
