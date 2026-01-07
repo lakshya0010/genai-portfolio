@@ -27,3 +27,11 @@
 - Reimplemented RAG using LangChain LCEL (Runnable pipelines)
 - Avoided deprecated chains and legacy APIs
 - Mapped manual RAG components directly to LangChain abstractions
+
+
+
+## Day 19 Notes
+
+- Built a controlled automation agent for emails/tasks
+- Used fixed execution flow instead of autonomous loops
+- Focused on structured, explainable outputs
