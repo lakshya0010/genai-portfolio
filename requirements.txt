@@ -1,6 +1,8 @@
 sentence-transformers
 langchain
+langchain-community
 openai
+ollama
 chromadb
 faiss-cpu
 streamlit
