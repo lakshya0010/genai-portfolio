@@ -17,8 +17,8 @@ The system is built using a controlled LangChain agent, exposed via a FastAPI ba
 - API-first design with frontend client
 
 
-## Architecture
-
+### Architecture
+```
 User
 ↓
 Streamlit UI
@@ -28,8 +28,7 @@ FastAPI (/process)
 LangChain Agent
 ↓
 Local LLM (Ollama)
-
-
+```
 
 
 **Tech Stack**
@@ -81,7 +80,7 @@ uvicorn week4.agent_api:app --reload
 streamlit run week4/streamlit_client.py
 ```
 
-Limitations
+### Limitations
 
 Uses a local LLM (performance depends on hardware)
 
@@ -91,9 +90,10 @@ Designed for learning and demonstration purposes
 
 
 
-👤 Author
+## 👤 Author
 
 Lakshya Sharma
+
 LinkedIn: https://www.linkedin.com/in/lakshya-sharma-551583312
 
 
