@@ -16,7 +16,9 @@ The system is built using a controlled LangChain agent, exposed via a FastAPI ba
 - Controlled agent flow (no autonomous loops)
 - API-first design with frontend client
 
-**Architecture**
+
+## Architecture
+
 User
 ↓
 Streamlit UI
@@ -26,6 +28,8 @@ FastAPI (/process)
 LangChain Agent
 ↓
 Local LLM (Ollama)
+
+
 
 
 **Tech Stack**
@@ -40,9 +44,13 @@ Local LLM (Ollama)
 ## 🧠 Project Structure
 
 week0/ → environment setup & git
+
 week1/ → embeddings & NLP fundamentals
+
 week2/ → vector databases & RAG
+
 week3/ → agent logic & tools
+
 week4/ → API & frontend (production system)
 
 
@@ -56,16 +64,22 @@ The earlier weeks build foundational components used in the final system.
 ```bash
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
+```
 
-2. Install dependencies
+### 2. Install dependencies
+```
 pip install -r requirements.txt
+```
 
-3. Start the API
+### 3. Start the API
+```
 uvicorn week4.agent_api:app --reload
+```
 
-4. Start the UI
+### 4. Start the UI
+```
 streamlit run week4/streamlit_client.py
-
+```
 
 Limitations
 
