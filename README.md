@@ -89,6 +89,10 @@ No authentication or persistent memory
 Designed for learning and demonstration purposes
 
 
+### Output
+![Screenshot](assets/screenshot1.jpg)
+![Screenshot](assets/screenshot2.jpg)
+![Screenshot](assets/screenshot3.jpg)
 
 ## 👤 Author
 
